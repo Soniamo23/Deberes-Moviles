@@ -1,30 +1,19 @@
-# React + TypeScript + Vite
+# React + Pangram
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+La función isPangram toma un parámetro sentence que se espera que sea una cadena de texto.
 
-Currently, two official plugins are available:
+-En la primera línea dentro de la función, sentence se convierte a minúsculas utilizando el método toLowerCase(). Esto es importante para asegurarse de que no haya distinción entre letras mayúsculas y minúsculas al verificar si la oración contiene todas las letras del alfabeto.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-En la segunda línea, se utiliza el spread operator ([...]) para crear un array de todas las letras del alfabeto en minúsculas: ["a", "b", ..., "z"].
 
-## Expanding the ESLint configuration
+Se utiliza el método every() en este array recién creado. El método every() verifica si todos los elementos del array cumplen con cierta condición. En este caso, la condición es proporcionada por la función de flecha (c => sentence.includes(c)). Esta función de flecha verifica si la letra c está presente en la cadena sentence.
+## React
+Se importa React y useState desde 'react'.
+Se importa './app.css' para aplicar estilos al componente.
+Se define un componente funcional App.
+Se utiliza el hook useState para crear un estado sentence y una función setSentence para actualizarlo.
+La función isPangram se define dentro del componente y se utiliza para verificar si la oración ingresada es un pangrama.
+-handleChange maneja los cambios en el input y actualiza el estado sentence.
+-handleSubmit maneja el envío del formulario, llama a isPangram para verificar la oración y muestra una alerta con el resultado.
+Se devuelve JSX que incluye un título, un formulario con un input y un botón, y se aplican estilos CSS.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
