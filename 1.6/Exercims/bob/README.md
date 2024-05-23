@@ -1,30 +1,37 @@
-# React + TypeScript + Vite
+# React + Bob
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Definición del componente App:
+Se define un componente funcional de React llamado App.
 
-Currently, two official plugins are available:
+## Función hey: 
+Esta función toma un mensaje como entrada y devuelve una respuesta basada en el contenido del mensaje. La lógica de la respuesta se basa en cuatro condiciones:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Si el mensaje está vacío o contiene solo espacios en blanco, responde con "¡Bien! ¡Sé así entonces!".
+Si el mensaje está escrito completamente en mayúsculas y termina con un signo de interrogación, responde con "¡Tranquilo, sé lo que estoy haciendo!".
+Si el mensaje está escrito completamente en mayúsculas pero no termina con un signo de interrogación, responde con "¡Whoa, cálmate!".
+Si el mensaje termina con un signo de interrogación, responde con "¡Claro!". En cualquier otro caso, responde con "Lo que sea.".
+Funciones auxiliares:
 
-## Expanding the ESLint configuration
+hearsBoring: Verifica si el mensaje está vacío o contiene solo espacios en blanco.
+hearsFreaky: Verifica si el mensaje está escrito completamente en mayúsculas.
+hearsInquisitive: Verifica si el mensaje termina con un signo de interrogación.
+Manejo de eventos del formulario:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Cuando se envía el formulario, se llama a la función handleMessageSubmit.
+Esta función obtiene el mensaje ingresado por el usuario desde el campo de entrada del formulario.
+Llama a la función hey para obtener la respuesta correspondiente.
+Muestra la respuesta en un cuadro de alerta en el navegador.
+Renderizado del componente App:
 
-- Configure the top-level `parserOptions` property like this:
+El componente App renderiza un formulario simple que permite al usuario ingresar un mensaje y enviarlo al chatbot.
+## Código
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+const handleMessageSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const inputElement = e.currentTarget.querySelector('input[type="text"]');
+    if (inputElement instanceof HTMLInputElement) {
+        const message = inputElement.value;
+        const response = hey(message);
+        alert(response);
+    }
+};
